@@ -1,0 +1,58 @@
+{% extends 'polls/base.html' %}
+{% block main_content %}
+{% load staticfiles %}
+<title> Employ Detail </title>
+<style>
+    td{
+        width:40%;
+        text-align: center;
+    }
+    th{
+        width:40%;
+    }
+</style>
+<div class="container">
+    <h1> Online Petrol Billing System </h1><br>
+    {% csrf_token %}
+    <p style="text-align:center"><strong> This is a detail view of Employee. </strong></p>
+    <table class='table table-bordered'>
+        <thread>
+            <tr>
+                <th> Employ Name</th>
+                <td> {{data.name}} </td>
+            </tr>
+        </thread>
+        <tbody>
+            <tr>
+                <th> Department </th>
+                <td> {{data.department}} </td>
+            </tr>
+            <tr>
+                <th> Accepted number of Petrol </th>
+                <td> {{data2.accepted_petrol_liter}} </td>
+            </tr>
+            <tr>
+                <th> Uploaded number of Petrol </th>
+                <td> {{data2.petrol_liter}} </td>
+            </tr>
+            <tr>
+                <th> From how many months the bill has been submitted </th>
+                <td> {{data2.bill_month}} </td>
+            </tr>
+            <tr>
+                <th> Bill Image </th>
+                <td><a href="bill_image/"> view bill image from here </a> </td>
+            </tr>
+            <tr>
+                <th>Total Price</th>
+                <td>{{data2.total_price}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <form class="form-signin" method="POST">
+        {% csrf_token %}
+        <button type='submit' class='btn btn-md btn-primary btn-block' value="accept" name="accept" >Accept</button>
+        <button type="submit" class="btn btn-md btn-primary btn-block" value="reject" name="reject" >Reject</button>
+        {% endblock %}
+    </form>
+</div>

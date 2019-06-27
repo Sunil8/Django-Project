@@ -1,0 +1,45 @@
+{% extends 'polls/base.html' %}
+{% block main_content %}
+<title> Bill Request </title>
+<div class='container' style='text-align:center'>
+    <h1> Online Petrol Billing System </h1><br>
+    {% csrf_token %}
+    <p style='text-align:center'><strong> Request accepted table </strong></p>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong> {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% include 'polls/search.html' %}
+        <table class='table table-bordered'>
+        <thread>
+            <tr>
+                <th> Name of Employ </th>
+                <th> Department </th>
+                <th> Type of Employee </th>
+                <th> Name of Supervisor </th>
+                <th> Accepted liter of Petrol </th>
+                <th> Accepted Date </th>
+            </tr>
+        </thread>
+        <tbody>
+                {% for pet in data2 %}
+                        <tr>
+                            <td> {{pet.worker_id.name}} </td>
+                            <td> {{pet.worker_id.department}} </td>
+                            <td> {{pet.worker_id.worker_type}} </td>
+                            <td> {{pet.worker_id.name_of_supervisor}} </td>
+                            <td> {{pet.accepted_petrol_liter}} </td>
+                            <td> {{pet.request_accept_date}} </td>
+                            <td> <a href="{% url 'bill_modify' value=pet.worker_id.id %}" button type='submit' class='btn btn-sm btn-primary btn-block'  name="upload_bill" >Update Bill</a></td>
+                        </tr>
+                {% endfor %}
+        </tbody>
+        </table>
+   
+        {% endblock %}
+
+</div>

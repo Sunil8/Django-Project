@@ -1,0 +1,12 @@
+{% extends 'polls/base.html' %}
+{% block main_content %}
+<title> Bill Submit </title>
+<form class='form-signin' method='POST' enctype='multipart/form-data'>
+    <h1> Online Petrol Billing System </h1><br>
+    {% csrf_token %}
+    <p style='text-align:center'><strong>
+    You can upload {{data2.accepted_petrol_liter}} liter petrol per month </strong></p>
+    {{form.as_p}}
+        <button type="submit" class="btn btn-md btn-primary btn-block">Upload</button>
+    {% endblock %}
+</form>

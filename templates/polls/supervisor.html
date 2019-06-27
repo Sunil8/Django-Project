@@ -1,0 +1,60 @@
+{% extends 'polls/base.html' %}
+{% block main_content %}
+{% load staticfiles %}
+<title> Supervisor </title>
+<div class="container" style="text-align:center">
+    <h1> Online Petrol Billing System </h1><br>
+    {% csrf_token %}
+    <p style="text-align:center"><strong> Request Table </strong></p>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong> {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% include 'polls/search.html' %}
+    <table class='table table-bordered'>
+        <thread>
+                <tr>
+                    <th> Employ </th>
+                    <th> Department </th>
+                    <th> Type(Insource or Oursource) </th>
+                    <!-- <th> Request no of petrol </th> -->
+                    <!-- <th> Date </th> -->
+                    <th> New Request </th>
+                </tr>
+            </thread>
+        <tbody>
+            
+           {% for pet in data2 %}
+           <tr>
+                <td>{{pet.worker_id.name}}</td>
+                <td>{{pet.worker_id.department}}</td>
+                <td>{{pet.worker_id.worker_type}}</td>
+                    {% if 'yes' in pet.request_status %}
+                           
+                            <!-- <td> {{employee.request_petrol_liter}} </td> -->
+                            <!-- <td> {{employee.request_date}} </td> -->
+                            <td><a href="{% url 'Supervisor_detail' pk=pk value=pet.worker_id.id %}">{{pet.request_status}}</a></td>
+                    {% elif 'no' in pet.request_status %}
+                            <!-- <td> {{employee.petrol_liter}} </td> -->
+                            <!-- <td> {{employee.request_date}} </td> -->
+                            <td> {{pet.request_status}} </td>
+                    {% else %}
+                            <!-- <td> {{employee.petrol_liter}} </td> -->
+                            <!-- <td> {{employee.request_date}} </td> -->
+                            <td>-</td>
+                    {% endif %}
+               </tr>
+            {% endfor %}
+    
+         </tbody>
+    </table>
+    <form class="form-signin">
+        <!-- <button type="submit" class="btn btn-lg btn-primary btn-block">Accept</button>
+        <button type="reset" class="btn btn-lg btn-secondary btn-block">Reject</button> -->
+        {% endblock %}
+    </form>
+</div>

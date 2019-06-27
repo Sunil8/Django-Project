@@ -1,0 +1,13 @@
+{% extends 'polls/base.html' %}
+{% block main_content %}
+
+<form class="form-signin">
+	{% csrf_token %}
+	<h1>Online Petrol Billing System</h1>
+	<a href="employee/" button class="btn btn-md btn-primary btn-block" type="submit" value="worker">log in as Employee</button></a>
+	<a href="supervisor/" button class="btn btn-md btn-primary btn-block" type="submit" value="supervisor">log in as supervisor</button></a>
+	<a href="HR/" button class="btn btn-md btn-primary btn-block" type="submit" value="HR">log in as HR</button></a>
+	<a href="account/" button class="btn btn-md btn-primary btn-block" type="submit" value="Account">log in as Account</button></a>
+	{% include 'polls/footer.html' %}
+</form>
+{% endblock %}
